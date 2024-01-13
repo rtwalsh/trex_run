@@ -41,13 +41,13 @@ while not done:
         for obstacle in obstacles:
             obstacle.update()
 
-        player.draw(screen)
         remaining_obstacles = []
         for obstacle in obstacles:
             obstacle.draw(screen)
 
             if obstacle.x > 0:
                 remaining_obstacles.append(obstacle)
+        player.draw(screen)
 
         obstacles = remaining_obstacles
         if new_obstacle_delay > 0:

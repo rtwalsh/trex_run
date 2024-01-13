@@ -34,6 +34,7 @@ class Player(Tile):
 
     def draw(self, screen):
         self.surface.fill(BLACK)
+        self.surface.set_colorkey(BLACK)
         self.surface.blit(self.images[self.image_index], (0, 0))
         Tile.draw(self, screen)
 
