@@ -5,15 +5,21 @@ from colors import *
 class Player(Tile):
 
     JUMP_AMOUNTS = [ 0, 36, 25, 16, 9, 7, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, -1, -2, -3, -4, -5, -7, -9, -16, -25, -36 ]
+    IMAGE_COUNT = 4
 
     def __init__(self, left, top):
         Tile.__init__(self, left, top, 50, 50)
         self.jumping = 0
-        self.images = [ pygame.image.load("./assets/trex1.png"), pygame.image.load("./assets/trex2.png") ]
-        for image in self.images:
+        self.images = []
+        for x in range(0, Player.IMAGE_COUNT):
+            image = pygame.image.load(self.get_image_name(x))
             image.set_colorkey(image.get_at((0, 0)))
+            self.images.append(image)
         self.image_index = 0
 
+    def get_image_name(self, index):
+        return "./assets/trex" + str(index + 1) + ".png"
+    
     def jump(self):
         if self.jumping == 0:
             self.jumping = len(Player.JUMP_AMOUNTS) - 1
