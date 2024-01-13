@@ -31,7 +31,8 @@ while not done:
                 Obstacle.slow_down()
 
     if not done:
-        screen.fill(BLACK)
+        screen.fill(SKY_BLUE)
+        pygame.draw.rect(screen, SAND, (0, HEIGHT - 40, WIDTH, HEIGHT))
 
         if new_obstacle_delay == 0 and random.random() > 0.8:
             if random.choice(["rock", "cactus"]) == "rock":
