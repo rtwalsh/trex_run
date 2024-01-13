@@ -34,7 +34,10 @@ while not done:
         screen.fill(BLACK)
 
         if new_obstacle_delay == 0 and random.random() > 0.8:
-            obstacles.append(Obstacle(WIDTH, 150, "rock.png"))
+            if random.choice(["rock", "cactus"]) == "rock":
+                obstacles.append(Obstacle(WIDTH, 150, "rock.png"))
+            else:
+                obstacles.append(Obstacle(WIDTH, 130, "cactus.png"))
             new_obstacle_delay = 30
 
         player.update()
