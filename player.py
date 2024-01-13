@@ -2,7 +2,7 @@ from tile import Tile
 
 class Player(Tile):
 
-    JUMP_AMOUNTS = [ 0, 36, 25, 16, 9, 5, 3, 2, 1, 0, 0, 0, -1. -2, -3, -5, -9, -16, -25, -36 ]
+    JUMP_AMOUNTS = [ 0, 34, 21, 13, 8, 5, 3, 2, 1, 1, 0, 0, 0, 0, 0, -1, -1, -2, -3, -5, -8, -13, -21, -34 ]
 
     def __init__(self, left, top):
         Tile.__init__(self, left, top, 50, 50)
