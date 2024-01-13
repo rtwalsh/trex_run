@@ -1,7 +1,7 @@
 import pygame
 import random
 from player import Player
-from rock import Rock
+from obstacle import Obstacle
 
 BLACK = (0, 0, 0)
 
@@ -23,14 +23,19 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-            player.jump()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                player.jump()
+            elif event.key == pygame.K_RIGHT:
+                Obstacle.speed_up()
+            elif event.key == pygame.K_LEFT:
+                Obstacle.slow_down()
 
     if not done:
         screen.fill(BLACK)
 
         if new_obstacle_delay == 0 and random.random() > 0.8:
-            obstacles.append(Rock(WIDTH, 150))
+            obstacles.append(Obstacle(WIDTH, 150, 20, 20))
             new_obstacle_delay = 30
 
         player.update()
