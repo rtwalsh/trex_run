@@ -1,20 +1,17 @@
 import pygame
-from tile import *
+from player import Player
 
 BLACK = (0, 0, 0)
 
 HEIGHT = 200
 WIDTH = 640
 
-TILE_HEIGHT = 50
-TILE_WIDTH = 50
-
 pygame.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("T-Rex Run")
 
-tile = Tile(20, 120, TILE_WIDTH, TILE_HEIGHT)
+tile = Player(20, 120)
 
 clock = pygame.time.Clock()
 done = False
