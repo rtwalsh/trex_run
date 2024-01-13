@@ -6,8 +6,10 @@ class Obstacle(Tile):
 
     speed = 4
 
-    def __init__(self, left, top, width, height):
-        Tile.__init__(self, left, top, width, height)
+    def __init__(self, left, top, image_name):
+        self.image = pygame.image.load("./assets/" + image_name)
+        self.image.set_colorkey(self.image.get_at((0, 0)))
+        Tile.__init__(self, left, top, self.image.get_rect().width, self.image.get_rect().height)
 
     @classmethod
     def speed_up(cls):
@@ -22,6 +24,8 @@ class Obstacle(Tile):
         self.x -= Obstacle.speed
 
     def draw(self, screen):
-        pygame.draw.rect(self.surface, WHITE, (0, 0, self.surface.get_width() - 1, self.surface.get_height() - 1))
+        self.surface.fill(BLACK)
+        self.surface.set_colorkey(BLACK)
+        self.surface.blit(self.image, (0, 0))
         Tile.draw(self, screen)
 
