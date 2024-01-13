@@ -1,4 +1,6 @@
+import pygame
 from tile import Tile
+from colors import *
 
 class Obstacle(Tile):
 
@@ -18,3 +20,8 @@ class Obstacle(Tile):
             
     def update(self):
         self.x -= Obstacle.speed
+
+    def draw(self, screen):
+        pygame.draw.rect(self.surface, WHITE, (0, 0, self.surface.get_width() - 1, self.surface.get_height() - 1))
+        Tile.draw(self, screen)
+

@@ -1,7 +1,5 @@
 import pygame
 
-WHITE = (255, 255, 255)
-
 class Tile:
 
 
@@ -14,5 +12,4 @@ class Tile:
         pass
     
     def draw(self, surface):
-        pygame.draw.rect(self.surface, WHITE, (0, 0, self.surface.get_width() - 1, self.surface.get_height() - 1))
         surface.blit(self.surface, (self.x, self.y))

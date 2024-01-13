@@ -2,8 +2,7 @@ import pygame
 import random
 from player import Player
 from obstacle import Obstacle
-
-BLACK = (0, 0, 0)
+from colors import *
 
 HEIGHT = 200
 WIDTH = 640
