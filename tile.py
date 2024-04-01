@@ -8,6 +8,9 @@ class Tile:
         self.x = left
         self.y = top
 
+    def get_rect(self):
+        return pygame.Rect(self.x, self.y, self.surface.get_width() - 1, self.surface.get_height() - 1)
+    
     def update(self):
         pass
     

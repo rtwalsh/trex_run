@@ -24,6 +24,10 @@ class Player(Tile):
         if self.jumping == 0:
             self.jumping = len(Player.JUMP_AMOUNTS) - 1
 
+    def did_collide_with(self, rect):
+        collision_rect = pygame.Rect(self.x + 5, self.y, self.surface.get_width() - 18, self.surface.get_height() - 6)
+        return collision_rect.colliderect(rect)
+            
     def update(self):
         self.delta_y = Player.JUMP_AMOUNTS[self.jumping]
         self.y += self.delta_y
@@ -37,4 +41,3 @@ class Player(Tile):
         self.surface.set_colorkey(BLACK)
         self.surface.blit(self.images[self.image_index], (0, 0))
         Tile.draw(self, screen)
-

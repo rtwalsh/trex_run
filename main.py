@@ -18,6 +18,7 @@ new_obstacle_delay = 0
 
 clock = pygame.time.Clock()
 done = False
+game_over = False
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -41,9 +42,10 @@ while not done:
                 obstacles.append(Obstacle(WIDTH, 130, "cactus.png"))
             new_obstacle_delay = 30
 
-        player.update()
-        for obstacle in obstacles:
-            obstacle.update()
+        if not game_over:
+            player.update()
+            for obstacle in obstacles:
+                obstacle.update()
 
         remaining_obstacles = []
         for obstacle in obstacles:
@@ -51,9 +53,15 @@ while not done:
 
             if obstacle.x > 0:
                 remaining_obstacles.append(obstacle)
+
         player.draw(screen)
 
         obstacles = remaining_obstacles
+        for obstacle in obstacles:
+            if player.did_collide_with(obstacle.get_rect()):
+                game_over = True
+                break
+
         if new_obstacle_delay > 0:
             new_obstacle_delay -= 1
 
