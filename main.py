@@ -19,6 +19,8 @@ new_obstacle_delay = 0
 clock = pygame.time.Clock()
 done = False
 game_over = False
+score = 0
+
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -37,9 +39,9 @@ while not done:
 
         if new_obstacle_delay == 0 and random.random() > 0.8:
             if random.choice(["rock", "cactus"]) == "rock":
-                obstacles.append(Obstacle(WIDTH, 150, "rock.png"))
+                obstacles.append(Obstacle(WIDTH, 150, "rock.png", 5))
             else:
-                obstacles.append(Obstacle(WIDTH, 130, "cactus.png"))
+                obstacles.append(Obstacle(WIDTH, 130, "cactus.png", 10))
             new_obstacle_delay = 30
 
         if not game_over:
@@ -53,6 +55,9 @@ while not done:
 
             if obstacle.x > 0:
                 remaining_obstacles.append(obstacle)
+            else:
+                score += obstacle.score_value
+                print("Scode:", score)
 
         player.draw(screen)
 
@@ -60,6 +65,7 @@ while not done:
         for obstacle in obstacles:
             if player.did_collide_with(obstacle.get_rect()):
                 game_over = True
+                print("Game Over")
                 break
 
         if new_obstacle_delay > 0:
