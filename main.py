@@ -8,6 +8,7 @@ HEIGHT = 200
 WIDTH = 640
 
 pygame.init()
+pygame.font.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("T-Rex Run")
@@ -20,6 +21,7 @@ clock = pygame.time.Clock()
 done = False
 game_over = False
 score = 0
+score_font = pygame.font.SysFont("arial", 28)
 
 while not done:
     for event in pygame.event.get():
@@ -42,12 +44,13 @@ while not done:
                 obstacles.append(Obstacle(WIDTH, 150, "rock.png", 5))
             else:
                 obstacles.append(Obstacle(WIDTH, 130, "cactus.png", 10))
-            new_obstacle_delay = 30
+            new_obstacle_delay = 40 - 2 * Obstacle.speed
 
         if not game_over:
             player.update()
             for obstacle in obstacles:
                 obstacle.update()
+            score += Obstacle.speed
 
         remaining_obstacles = []
         for obstacle in obstacles:
@@ -60,12 +63,13 @@ while not done:
                 print("Scode:", score)
 
         player.draw(screen)
+        score_surface = score_font.render("Score: " + str(score), False, (0, 0, 0))
+        screen.blit(score_surface, (0, 0))
 
         obstacles = remaining_obstacles
         for obstacle in obstacles:
             if player.did_collide_with(obstacle.get_rect()):
                 game_over = True
-                print("Game Over")
                 break
 
         if new_obstacle_delay > 0:
